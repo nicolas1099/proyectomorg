@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      plataformas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">plataformas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+ <ion-item *ngFor="let plataforma of plataformas" >
+  <p>{{ plataforma.nombre_plataforma }} </p>
+ </ion-item>
+ <ion-item *ngFor="let juego of juegos">
+  <p>{{ juego.nombre_juego }}</p>
+ </ion-item>
+</ion-content>

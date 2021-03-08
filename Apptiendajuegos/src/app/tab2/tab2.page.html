@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      juegos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">juegos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card *ngFor="let juego of juegos" >
+    <ion-card-header>
+      <ion-card-subtitle>fecha de entrega : {{ juego.entrega }}</ion-card-subtitle>
+      <ion-card-subtitle>{{ juego.plataforma }}</ion-card-subtitle>
+      <ion-card-title>{{ juego.nombre_juego }},{{ juego.precio }}$</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>{{ juego.descripcion }}</ion-card-content>
+    <ion-checkbox color="dark"></ion-checkbox>
+  </ion-card>
+</ion-content>
+
