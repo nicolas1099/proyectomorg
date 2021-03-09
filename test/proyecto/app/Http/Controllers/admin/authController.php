@@ -15,10 +15,10 @@ class authController extends Controller
     public function registro(Request $request)
     {
         $rules = [
-            'id'       => 'required|integer',
             'nombre'     => 'required',
             'apellidos'  => 'required',
-            'pass' => 'required',
+            'password' => 'required',
+            'email' => 'required',
             'login' => 'required',
             'perfil' => 'required'
         ];
@@ -43,8 +43,9 @@ class authController extends Controller
         $usuarios = Usuarios::create(array(
             'id'       => $request->input('id'),
             'nombre'     => $request->input('nombre'),
+            'email'     => $request->input('email'),
             'apellidos'  => $request->input('apellidos'),
-            'pass' => bcrypt($request->pass),
+            'password' => bcrypt($request->pass),
             'login' => $request->input('login'),
             'perfil' => $request->input('perfil')
             
@@ -73,12 +74,12 @@ class authController extends Controller
 
         #Paso1-. validamos el  email/pasword que viene del password
         $request->validate([
-            'nombre' => 'required|string',
-            'pass' => 'required|string'
+            'email' => 'required|string',
+            'password' => 'required|string'
         ]);
 
         #Paso2-. Creamos el array de credenciales --> ['email => $email, 'password'=>$password] con el método Auth::attemp
-        $credentials = request(['nombre', 'pass']);
+        $credentials = request(['email', 'pass']);
 
         #Paso3-. Verificamos si las credenciales no son válidas se devuelve un mensaje de error
         #se chequea en la tabla User sis existe el email/password

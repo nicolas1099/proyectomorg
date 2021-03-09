@@ -14,7 +14,7 @@ class CreateUsuariosTable extends Migration
     public function up()
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->integer('id')->primary();
             $table->string('login',25);
             $table->string('pass',25);
             $table->string('nombre',40);
@@ -23,6 +23,7 @@ class CreateUsuariosTable extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
