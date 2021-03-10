@@ -14,7 +14,7 @@ class CreateDesarrolladorasTable extends Migration
     public function up()
     {
         Schema::create('desarrolladoras', function (Blueprint $table) {
-            $table->unsignedinteger('desarrolladoraid')->primary();
+            $table->integer('desarrolladoraid')->primary();
             $table->string('nombdesarrolladora');
             $table->timestamps();
         });
