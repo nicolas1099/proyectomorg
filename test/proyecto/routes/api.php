@@ -7,7 +7,7 @@ use App\Http\Controllers\admin\desarrolladoraController;
 use App\Http\Controllers\admin\plataformasController;
 use App\Http\Controllers\admin\authController;
 
-
+ 
 /*
 |--------------------------------------------------------------------------
 | API Routes

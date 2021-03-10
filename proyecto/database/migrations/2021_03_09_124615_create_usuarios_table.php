@@ -17,8 +17,8 @@ class CreateUsuariosTable extends Migration
             $table->unsignedinteger('id')->primary();
             $table->string('pasword',255);
             $table->string('nombre',255);
-            $table->string('apellido',255);
-            $table->string('mail',255);
+            $table->string('apellidos',255);
+            $table->string('email',255);
             $table->biginteger('perfilid')->unsigned();
             $table->timestamps();
         });
