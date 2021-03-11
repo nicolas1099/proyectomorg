@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\juegosController;
 use App\Http\Controllers\admin\desarrolladorasController;
 use App\Http\Controllers\admin\plataformasController;
@@ -22,6 +23,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'signup']);
+
 Route::resource('juegos', juegosController::class);
 Route::resource('desarrolladoras', desarrolladorasController::class);
 Route::resource('plataformas', plataformasController::class);
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('user', [AuthController::class, 'getUser']);
+});
