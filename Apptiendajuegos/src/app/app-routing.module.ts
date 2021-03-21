@@ -1,25 +1,18 @@
-import { NgModule } from '@angular/core';
+import { PlataformasComponent } from './components/plataformas/plataformas.component';
+import { NgModule, Component } from '@angular/core';
+import { PortadaComponent } from './Components/comunes/portada/portada.component';
+import { PerfilComponent } from './Components/comunes/perfil/perfil.component';
+import { LoginComponent } from './Components/comunes/login/login.component';
+import { SignupComponent } from './Components/comunes/signup/signup.component';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
-    path: 'portada',
-    loadChildren: () => import('./portada/portada.module').then( m => m.PortadaPageModule)
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'contactos',
-    loadChildren: () => import('./contactos/contactos.module').then( m => m.ContactosPageModule)
-  },
-  {
-    path: 'creatuser',
-    loadChildren: () => import('./creatuser/creatuser.module').then( m => m.CreatuserPageModule)
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: PortadaComponent , outlet: 'primary'},
+  { path: 'perfil', component: PerfilComponent },
+  { path: 'login', component: LoginComponent, outlet: 'primary'},
+  { path: 'signup', component: SignupComponent},
+  {path: '',
+    loadChildren: () => import('./components/plataformas/plataformas.module').then(m => m.PlataformasModule)
   }
 ];
 @NgModule({
