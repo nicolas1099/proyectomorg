@@ -15,7 +15,7 @@ class juegosController extends Controller
     public function index()
     {
         {
-            $juegos = juegos::all();
+            $juegos = juegos::with('plataformas')->get();
             return  response()->json($juegos);
         }
     }
@@ -49,7 +49,16 @@ class juegosController extends Controller
      */
     public function show($id)
     {
-        //
+        $juegos = juegos::with('mijuego')
+                            ->select('*')
+                            ->where('juegoid', '=', $id)
+                            ->get();
+        return response()-json([
+            'status' => 'success',
+            'message' => 'Juego seleccionado' ,
+            'data' => $juegos,
+            'code' => 401,
+        ]);
     }
 
     /**

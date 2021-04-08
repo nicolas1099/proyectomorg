@@ -3,17 +3,35 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\plataformas;
+use App\Models\juegos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class plataformasController extends Controller
 {
+    public function getjuegos($id){
+        $juegos1 = Plataformas::with('juegos')->where('id','=',$id)->get();
+        $juegos = juegos::select("*")
+                            ->where('plataformaid', $id)
+                            ->get();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'juegos de la Plataforma '. $id ,
+            'code' => 401,
+            'data' => $juegos
+        ])
+    }
     public function index()
     {
         {
 
-            $plataformas = plataformas::with('juegos')->get();
-            return  response()->json($plataformas);
+            $plataformas = plataformas::all();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'plataformas de los juego',
+                'code' => 401,
+                'data' => $plataformas
+            ])
         
         }
     }
@@ -36,7 +54,7 @@ class plataformasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "nueva plataforma"
     }
 
     /**
