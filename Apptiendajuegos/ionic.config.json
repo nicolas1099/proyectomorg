@@ -1,0 +1,7 @@
+{
+  "name": "Apptiendajuegos",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
