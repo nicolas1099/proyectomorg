@@ -19,7 +19,7 @@ class plataformasController extends Controller
             'message' => 'juegos de la Plataforma '. $id ,
             'code' => 401,
             'data' => $juegos
-        ])
+        ]);
     }
     public function index()
     {
@@ -31,7 +31,7 @@ class plataformasController extends Controller
                 'message' => 'plataformas de los juego',
                 'code' => 401,
                 'data' => $plataformas
-            ])
+            ]);
         
         }
     }
@@ -54,7 +54,7 @@ class plataformasController extends Controller
      */
     public function store(Request $request)
     {
-        echo "nueva plataforma"
+        echo "nueva plataforma";
     }
 
     /**

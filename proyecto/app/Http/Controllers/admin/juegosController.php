@@ -49,9 +49,9 @@ class juegosController extends Controller
      */
     public function show($id)
     {
-        $juegos = juegos::with('mijuego')
+        $juegos = juegos::with('plataformas')
                             ->select('*')
-                            ->where('juegoid', '=', $id)
+                            ->where('juegoid',$id)
                             ->get();
         return response()-json([
             'status' => 'success',
