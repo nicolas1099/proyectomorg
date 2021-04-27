@@ -1,31 +1,9 @@
 <ion-app>
-  <ion-menu side="start" menuId="custom" contentId="main-content" class="my-custom-menu">
-    <ion-header>
-      <ion-item>
-          <ion-menu-button></ion-menu-button>
-          <ion-title>PUTO</ion-title>
-      </ion-item> 
-
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-menu-toggle auto-hide="false">
-        <ion-item routerLink="inicio">inicio</ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle auto-hide="false">
-        <ion-item routerLink="login">login</ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle auto-hide="false">
-        <ion-item routerLink="registro">registro</ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle auto-hide="false">
-        <ion-item routerLink="inmuebles">Inmuebles</ion-item>
-      </ion-menu-toggle>
-        <ion-item>Menu Item</ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-  <ion-router-outlet id="main-content">
+  <ion-router-outlet>
 
   </ion-router-outlet>
+  <ion-router-outlet name="primary">
+      
+  </ion-router-outlet>
+
 </ion-app>

@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar color="black">
+      <ion-title color="light" size="Large">
+        esta usted en {{seccion}}
+      </ion-title>
+      <ion-buttons slot="secondary">
+        <ion-back-button defaultHref="/" text="" color="light"></ion-back-button>
+        <ion-button expand="full" [routerLink]="['/', { outlets: { primary: ['login'] }}]">
+          <ion-icon  name="log-in-outline"></ion-icon>
+          Login 
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>

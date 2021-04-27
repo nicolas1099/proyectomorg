@@ -9,7 +9,7 @@ export class PlataformasService {
   constructor(private http: HttpClient ) { }
 
   public getPlataformas(){
-    return this.http.get('http://proyecto.test:8081/api/plataformas');
+    return this.http.get('http://proyecto.test/api/plataformas');
   }
 
 }

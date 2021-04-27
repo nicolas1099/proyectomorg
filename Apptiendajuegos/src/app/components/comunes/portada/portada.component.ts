@@ -1,4 +1,6 @@
+import { UsuariosService } from '../../../service/usuarios.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-portada',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortadaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private uService: UsuariosService) { }
+  
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.uService.userStorageObservable
+    .subscribe ( data => {
+      console.log (data );
+    })
+  }
 
 }

@@ -1,3 +1,6 @@
+import { ConfigService } from './../../../service/config.service';
+import { UsuariosService } from './../../../service/usuarios.service';
+import { IUsuario } from './../../../interfaces/usuario-interface';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
-  constructor() { }
+  usuario: IUsuario;
 
-  ngOnInit() {}
+  constructor(private uService: UsuariosService, public configService: ConfigService) { }
+
+  async ngOnInit() {
+    this.uService.userStorageObservable
+      .subscribe ( data => {
+        this.usuario = data;
+        console.log (this.usuario );
+      })
+  }
+  async ionViewWillEnter (){
+    console.log('entra');
+    this.usuario = await this.uService.getUsuarioStorage();
+    console.log(this.usuario);
+  }
 
 }

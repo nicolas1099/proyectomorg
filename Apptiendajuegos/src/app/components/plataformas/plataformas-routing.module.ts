@@ -3,12 +3,12 @@ import { JuegosplataformasComponent } from './juegosplataformas/juegosplataforma
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
- {
-   path: '', component: PlataformasComponent,
+{
+  path: '', component: PlataformasComponent,
     children: [
 
     ]
- },
+},
 {
   path: 'productos/:id', component: JuegosplataformasComponent, outlet: 'primary'
 }

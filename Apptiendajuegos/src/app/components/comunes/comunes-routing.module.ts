@@ -1,3 +1,4 @@
+import { CambiorolComponent } from './cambiorol/cambiorol.component';
 import { NgModule } from '@angular/core';
 import { PortadaComponent } from './portada/portada.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -9,7 +10,8 @@ const routes: Routes = [
   { path: 'home', component: PortadaComponent},
   { path: 'perfil', component: PerfilComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'registro', component: SignupComponent}
+  { path: 'registro', component: SignupComponent},
+  { path: 'cambiorol', component: CambiorolComponent},
 ];
 
 @NgModule({

@@ -11,7 +11,8 @@ export interface ICliente {
 export interface IUsuario {
     id: number;
     name: string;
-    surname: string;
+    apellidos: string;
+    surname?: string;
     rol: string;
     email: string;
     password: string;

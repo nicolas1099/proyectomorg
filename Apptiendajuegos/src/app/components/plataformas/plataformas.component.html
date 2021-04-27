@@ -1,3 +1,9 @@
+<ion-header>
+  <app-header seccion="Plataforas"></app-header>
+</ion-header>
 <p>
   plataformas works!
 </p>
+<ion-button slot="end" *ngIf="configService.isClickConfig">
+  editar las plataformas
+</ion-button>

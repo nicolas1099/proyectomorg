@@ -20,7 +20,7 @@ export class UsuariosService {
   constructor(private http: HttpClient, private storage: Storage) { }
 
   public getUsuarios(){
-    return this.http.get('http://proyecto.test:8081/api/admin/usuarios');
+    return this.http.get('http://proyecto.test/api/admin/usuarios');
   }
 
   login (loginUser: ILogin): Promise<MsnApiLogin>{

@@ -9,6 +9,6 @@ export class JuegosService {
   constructor(private http: HttpClient ) { }
 
   public getJuegos(){
-    return this.http.get('http://proyecto.test:8081/api/juegos');
+    return this.http.get('http://proyecto.test/api/juegos');
   }
 }
