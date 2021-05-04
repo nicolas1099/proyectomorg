@@ -25,6 +25,9 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      <ion-button slot="end" *ngIf="configService.isClickConfig">
+        cambiar nombre
+      </ion-button>
       
     </ion-card-content>
   </ion-card>

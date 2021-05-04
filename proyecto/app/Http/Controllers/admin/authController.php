@@ -177,15 +177,15 @@ class AuthController extends Controller
         $usuario = User::with('cliente')->find($user->id);
 
         return response()->json([
-           'status' => 'success',
-           'user' => $usuario,
-           'token' => [
+        'status' => 'success',
+        'user' => $usuario,
+        'token' => [
                 'access_token' => $token,
                 'token_type' => 'Bearer ',
                 'expires_at' => Carbon::parse($tokenAuth->token->expires_at)->toDateTimeString()
-           ]
+        ]
 
-       ]);
+    ]);
 
     }
 

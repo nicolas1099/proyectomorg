@@ -5,7 +5,9 @@ import { UsuariosService } from './service/usuarios.service';
 import { Router } from '@angular/router';
 import { IUsuario } from './interfaces/usuario-interface';
 import { ConfigService } from './service/config.service';
-
+import { MenuController } from '@ionic/angular';
+//import { StatusBar } from '@ionic-native/status-bar';
+//import { SplashScreen } from '@ionic-native/splash-screen';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -17,6 +19,7 @@ export class AppComponent implements OnInit{
 
   constructor(
     private platform: Platform,
+    private menu: MenuController,
     //private splashScreen: SplashScreen,
     //private statusBar: StatusBar,
     private plataformasService: PlataformasService,
@@ -25,6 +28,19 @@ export class AppComponent implements OnInit{
     private router: Router,
     private configService: ConfigService
   ) { this.initializeApp();
+  }
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
+  }
+
+  openEnd() {
+    this.menu.open('end');
+  }
+
+  openCustom() {
+    this.menu.enable(true, 'custom');
+    this.menu.open('custom');
   }
 
   initializeApp() {

@@ -1,9 +1,27 @@
 <ion-app>
-  <ion-router-outlet>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay" menuId="first" (click)="getUser()">
+      <ion-header>
+        <ion-list-header *ngIf="usuario" >
+          <div id="datos" color="success" >
+            <div id="usuario">
+              <p>{{usuario.name}}</p> 
+              <p>{{ usuario.email }}</p>
+              <p>{{ usuario.rol}}</p>
+            </div>    
+          </div>
+        </ion-list-header>
+      </ion-header>
+      <ion-content> 
+        <ion-list id="inbox-list">
+        </ion-list>
+        <router-outlet name="rfiltros">
+          test
+        </router-outlet>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
 
-  </ion-router-outlet>
-  <ion-router-outlet name="primary">
-      
-  </ion-router-outlet>
-
+  </ion-split-pane>
+  
 </ion-app>

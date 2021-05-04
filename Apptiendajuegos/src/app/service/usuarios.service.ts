@@ -98,7 +98,6 @@ export class UsuariosService {
         });
     });
   }
- 
   getRol(): Promise<string>{
     return new Promise<string> ( resolve =>{
       this.storage.get('usuario')
