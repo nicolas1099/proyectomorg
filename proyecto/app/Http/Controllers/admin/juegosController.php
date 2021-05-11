@@ -51,14 +51,16 @@ class juegosController extends Controller
     {
         $juegos = juegos::with('plataformas')
                             ->select('*')
-                            ->where('juegoid',$id)
+                            ->where('juegoid', $id)
                             ->get();
-        return response()-json([
+        return response()->json([
             'status' => 'success',
-            'message' => 'Juego seleccionado' ,
+            'message' => 'Juego seleccionado'. $id ,
             'data' => $juegos,
             'code' => 401,
+        
         ]);
+
     }
 
     /**
