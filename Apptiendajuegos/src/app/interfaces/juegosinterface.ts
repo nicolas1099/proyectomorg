@@ -6,7 +6,7 @@ export interface IJuego {
     precio?: number;
     entrega?: string;
     imagen?: string;
-    plataforma?: Iplataforma;   
+    plataformaid?: Iplataforma;   
 }
 
 export interface Iplataforma {
@@ -14,7 +14,7 @@ export interface Iplataforma {
     productos?: IJuego[]
 }
 
-export interface MsnApiProductos {
+export interface MsnApiPlataformas {
     status?: string;
     message?: string;
     errors?: string

@@ -1,9 +1,29 @@
 <ion-header>
-  <app-header seccion="Plataforas"></app-header>
+  <app-header></app-header>
 </ion-header>
-<p>
-  plataformas works!
-</p>
-<ion-button slot="end" *ngIf="configService.isClickConfig">
-  editar las plataformas
-</ion-button>
+<ion-content>
+  <ion-item>
+    <h3>Listado de Gamas  </h3>
+    <ion-button slot="end" *ngIf="configService.isClickConfig">
+      Nueva Plataforma
+    </ion-button>
+  </ion-item>
+
+  <ion-list>
+      <ion-card *ngFor="let p of plataformas">
+        <ion-card-header 
+          [routerLink]="['/tabs/plataformas/juegosplataformas']" >
+        <!--  <img src="{{ images }}/{{ g.Imagen }}"> -->
+          <img [src] = "p.imagen | viewImage: 'plataformas'">
+          <ion-card-title >{{ p.nombre_plataforma }}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+        <p>{{p.descripcion}}</p>
+        </ion-card-content>
+      </ion-card>
+  </ion-list>
+  <router-outlet >
+fgdfs
+  </router-outlet>
+</ion-content>

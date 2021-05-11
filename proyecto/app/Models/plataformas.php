@@ -11,7 +11,7 @@ class plataformas extends Model
     protected $table = 'plataformas';
     protected $primarykey = 'id';
     protected $fillable = [
-        'id','nombre','created_at','updated_at'];
+        'id','nombre','imagen','descripcion','created_at','updated_at'];
 
     public function juegos(){
         return $this->hasMany(juegos::class,'plataformaid','id');

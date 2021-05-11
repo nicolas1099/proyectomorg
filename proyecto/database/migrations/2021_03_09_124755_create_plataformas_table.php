@@ -16,7 +16,10 @@ class CreatePlataformasTable extends Migration
         Schema::create('plataformas', function (Blueprint $table) {
             $table->integer('id')->primary();
             $table->string('nombre_plataforma',100)->default('');
+            $table->string('imagen');
+            $table->string('descripcion');
             $table->timestamps();
+            
         });
     }
 

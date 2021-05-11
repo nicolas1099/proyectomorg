@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '',loadChildren: () => import('./components/comunes/comunes.module').then(m => m.ComunesModule) },
 
   {path: 'plataformas',
-    loadChildren: () => import('./components/plataformas/plataformas.module').then(m => m.PlataformasModule)
+  loadChildren: () => import('./components/plataformas/plataformas.module').then(m => m.PlataformasModule)
   },
 ];
 @NgModule({
