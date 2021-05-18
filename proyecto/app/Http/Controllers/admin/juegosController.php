@@ -94,6 +94,9 @@ class juegosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $juegos = juegos::with('plataformas')
+                            ->select('*')
+                            ->where('juegoid', $id)
+                            ->get();
     }
 }

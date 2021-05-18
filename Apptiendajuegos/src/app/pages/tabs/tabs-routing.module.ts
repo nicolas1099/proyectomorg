@@ -1,3 +1,4 @@
+import { JuegosModule } from './../../components/juegos/juegos.module';
 import { PlataformasModule } from './../../components/plataformas/plataformas.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: '', loadChildren: () => import('../../components/comunes/comunes.module').then(m => m.ComunesModule) },
       { path: 'plataformas', loadChildren: () => import('../../components/plataformas/plataformas.module').then(m => m.PlataformasModule)   },
+      { path: 'juegos', loadChildren: ()=>import('../../components/juegos/juegos.module').then(m => m.JuegosModule)},
     ]
   }
 ];

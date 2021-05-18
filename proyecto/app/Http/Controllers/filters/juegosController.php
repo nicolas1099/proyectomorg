@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\filters;
 
 use App\Models\juegos;
 
@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 class juegosController extends Controller
 {
     public function filtros(Request $request) {
-        // $plataformas = json_decode($request->input('data'));
         $data = json_decode($request->input('data'), true);
         $precios = $data['precios'];
         $plataformas = $data['plataformas'];

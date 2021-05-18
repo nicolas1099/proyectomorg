@@ -1,3 +1,19 @@
-<p>
-  juego works!
-</p>
+<ion-header>
+  <app-header ></app-header>
+</ion-header>
+<ion-content *ngIf="juego">
+  <h3>{{juego.nombre_juego}} </h3>
+
+  <ion-item  *ngIf="configService.isClickConfig">
+    <ion-icon [routerLink]="[ '/tabs/juego/edit/',juego.juegoid]" 
+    color="primary" slot="end" name="create"></ion-icon>
+  </ion-item>  
+    <ion-card>
+    <img *ngIf="juego.imagen" [src] = "juego.imagen | viewImage: 'juegos'">
+    <ion-card-content>
+      {{ juego.descripcion | truncate: 50 }}
+    </ion-card-content>
+    <h2>{{juego.precio}}$</h2>
+  </ion-card>
+
+</ion-content>

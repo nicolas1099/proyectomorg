@@ -18,7 +18,7 @@ export class JuegosService {
     async showJuegos(id): Promise<MsnApijuegos>{
       console.log('Id = ', id);
       const token = await this.uService.getToken();
-      const ruta = `${ URL }/api/admin/productos/${id}`;
+      const ruta = `${ URL }/api/admin/juegos/${id}`;
       const httpOptions = {
         headers: new HttpHeaders({
           'Accept' : 'application/json',

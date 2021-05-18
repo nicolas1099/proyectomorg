@@ -1,9 +1,9 @@
 <ion-header>
-  <app-header></app-header>
+  <app-header seccion="Perfil"></app-header>
 </ion-header>
 <ion-content>
   <ion-item>
-    <h3>Listado de Gamas  </h3>
+    <h3>Listado de Plataformas  </h3>
     <ion-button slot="end" *ngIf="configService.isClickConfig">
       Nueva Plataforma
     </ion-button>
@@ -12,8 +12,7 @@
   <ion-list>
       <ion-card *ngFor="let p of plataformas">
         <ion-card-header 
-          [routerLink]="['/tabs/plataformas/juegosplataformas']" >
-        <!--  <img src="{{ images }}/{{ g.Imagen }}"> -->
+          [routerLink]="['/tabs/juegos/plataformas', p.id]" >
           <img [src] = "p.imagen | viewImage: 'plataformas'">
           <ion-card-title >{{ p.nombre_plataforma }}</ion-card-title>
         </ion-card-header>
@@ -24,6 +23,6 @@
       </ion-card>
   </ion-list>
   <router-outlet >
-fgdfs
+
   </router-outlet>
 </ion-content>

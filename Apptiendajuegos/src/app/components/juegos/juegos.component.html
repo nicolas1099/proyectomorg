@@ -1,3 +1,30 @@
-<p>
-  juegos works!
-</p>
+<ion-header>
+  <app-header ></app-header>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <h3>Listado de juegos </h3>
+  </ion-item>
+  <ion-list *ngIf="juegos" >
+    <ion-card *ngFor="let juego of juegos">
+      <ion-item class="juegos" *ngIf="configService.isClickConfig">
+      <ion-icon [routerLink]="[ '/tabs/productos/edit/',juego.juegoid]" 
+                  color="primary" slot="end" name="create"></ion-icon>
+        <ion-icon color="primary" slot="end" name="trash"></ion-icon>
+        <ion-icon color="primary" slot="end" name="close"></ion-icon>
+      </ion-item>
+      <ion-card-header [routerLink]="[ '/tabs/juegos/detalle/',juego.juegoid,'S' ]">
+        <img *ngIf="juego.imagen" [src] = "juego.imagen | viewImage: 'juegos'">
+        <ion-card-title>
+          <ion-input type="text" name="nombre" [value]="juego.nombre_juego" [(ngModel)]="juego.nombre_juego"> {{juego.nombre_juego }}</ion-input>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{ juego.descripcion | truncate: 5 }}
+        <h2>{{juego.precio}}$</h2>
+        
+      </ion-card-content>
+      
+    </ion-card>
+  </ion-list>
+</ion-content>
