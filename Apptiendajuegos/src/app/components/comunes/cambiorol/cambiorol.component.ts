@@ -1,5 +1,5 @@
+import { UsuariosService } from './../../../service/usuarios.service';
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-cambiorol',
   templateUrl: './cambiorol.component.html',
@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CambiorolComponent implements OnInit {
 
-  constructor() { }
+  constructor(private UsuariosService:UsuariosService) { console.log(this.UsuariosService.getUsuarios());}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    let usuarios = await this.UsuariosService.getUsuarios();
+      console.log(this.UsuariosService);
+  }
 
 }
