@@ -33,4 +33,31 @@ export class JuegosService {
           });
       });
     }
+
+    async dellJuegos(id): Promise<MsnApijuegos>{
+      const ruta = `${ URL }/api/admin/juegos/${id}/remove`;
+      console.log(ruta);
+      return new Promise ( resolve => {
+        this.http.delete<MsnApijuegos>(ruta)
+        .subscribe(data => {
+          console.log(data);
+          resolve(data);        
+        });
+    });
+    }
+
+    async updjuegos(id, nombre_juego: string,descripcion: string,precio: number): Promise<MsnApijuegos>{
+      const ruta =  `${ URL }/api/admin/juegos/${id}/upjuegos`;;
+      console.log(ruta);
+      const data = { nombre_juego, descripcion, precio };
+      console.log(data);
+      return new Promise ( resolve => {
+        this.http.put<MsnApijuegos>(ruta,data)
+        .subscribe(datos => {
+          console.log(datos);
+          resolve(datos);        
+        });
+    });
   }
+  }
+  

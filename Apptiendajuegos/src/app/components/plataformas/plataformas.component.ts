@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlataformasService } from './../../service/plataformas.service';
 import { Iplataforma } from './../../interfaces/juegosinterface';
@@ -7,7 +7,7 @@ import { IRuta } from './../../interfaces/BreadInterfaces';
 import { UsuariosService } from './../../service/usuarios.service';
 import { NavController } from '@ionic/angular';
 import { ConfigService } from './../../service/config.service';
-
+import {IonInfiniteScroll} from '@ionic/angular';
 const URL = environment.url;
 
 @Component({
@@ -16,6 +16,7 @@ const URL = environment.url;
   styleUrls: ['./plataformas.component.scss'],
 })
 export class PlataformasComponent implements OnInit {
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   plataformas: Iplataforma;
   plataforma: any;
   rol: string;
@@ -58,5 +59,16 @@ export class PlataformasComponent implements OnInit {
   }
   juegos (plataforma){
     console.log (plataforma)
+  }
+  loadData(event){
+    console.log('cargando siguientes.....')
+    setTimeout(() => {
+    event.target.complete()
+    event.target.disabled = true;
+    },500)
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 }

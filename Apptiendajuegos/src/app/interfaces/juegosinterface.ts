@@ -1,4 +1,3 @@
-
 export interface IJuego {
     juegoid?: number
     nombre_juego?: string;

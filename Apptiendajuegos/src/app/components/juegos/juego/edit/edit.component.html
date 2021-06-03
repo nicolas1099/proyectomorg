@@ -2,5 +2,22 @@
   <app-header ></app-header>
 </ion-header>
 <ion-content>
-  <h3>editar un juego </h3>
+  <ion-card-content *ngIf="juego">
+      <ion-text>juego: {{juego.nombre_juego}}</ion-text>
+      <form (ngSubmit)="updjuegos(fEditJuegos)" #fEditJuegos="ngForm">
+          <ion-item>
+              <ion-label position="floating">Nombre juego</ion-label>
+              <ion-input required name="nombre_juego" type="text" [(ngModel)]="juego.nombre_juego"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">descripcion</ion-label>
+            <ion-input required name="descripcion" type="text" [(ngModel)]="juego.descripcion"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">precio</ion-label>
+          <ion-input required name="precio" type="text" [(ngModel)]="juego.precio"></ion-input>
+      </ion-item>
+          <ion-button expand="full" type="submit" routerLink="/tabs/perfil">Editar juego</ion-button>
+      </form>
+  </ion-card-content>
 </ion-content>

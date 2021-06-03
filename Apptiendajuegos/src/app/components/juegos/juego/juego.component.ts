@@ -32,7 +32,6 @@ export class JuegoComponent implements OnInit {
     console.log(this.read, this.accion);
   }
 
-
   async ngOnInit() {
     this.codjuego = this.route.snapshot.paramMap.get('id');
     this.accion = this.route.snapshot.paramMap.get('accion');
@@ -43,6 +42,14 @@ export class JuegoComponent implements OnInit {
     if (respuesta.status == 'success'){
       this.juego = respuesta.data[0];
       console.log(this.juego);
+    }
+  }
+  async borrarjueg(codjuego){
+    console.log(codjuego);
+    let respuesta = await this.JuegService.dellJuegos(codjuego);
+    console.log(respuesta);
+    if (respuesta.status=='success'){
+      
     }
   }
 

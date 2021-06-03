@@ -81,9 +81,25 @@ class juegosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $juegoid)
     {
-        //
+        //echo $juegoid;
+        //echo $request['descripcion'];
+    
+        $juego = juegos::where('juegoid', $juegoid)->update($request->only('nombre_juego','descripcion','precio'));
+        $juego1 = juegos::where('juegoid', $juegoid)->get();
+    
+        if ($juego === null) {
+            return response()->json('', 404);
+        }else{
+            return  response()->json([
+                'status' => 'success',
+                'message' => 'juegos.',
+                'code' => 401,
+                'data' => $juego1
+            ]);
+        }
+        
     }
 
     /**
@@ -94,9 +110,29 @@ class juegosController extends Controller
      */
     public function destroy($id)
     {
-        $juegos = juegos::with('plataformas')
+        juegos::with('plataformas')
                             ->select('*')
                             ->where('juegoid', $id)
-                            ->get();
-    }
+                            ->delete($id);
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Juego seleccionado se elimino'
+            ]);
+        }
+
+    public function deljuego($juegoid)
+    {   
+            $result = juegos::where('juegoid', $juegoid)->delete();
+            if ($result == 1){
+                $mensaje = "juego ". $juegoid. " eliminado correctamente";
+            }else{
+                $mensaje = "juego ". $juegoid. " No eliminado";
+            };
+            return response()->json([
+                'status' => 'success',
+                'message' => $mensaje,
+                'code' => 401,
+            ]);
+        }
 }

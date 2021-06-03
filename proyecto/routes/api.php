@@ -28,6 +28,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'signup']);
 
 Route::resource('juegos', juegosController::class);
+Route::delete('admin/juegos/{juegoid}/remove', [juegosController::class,'deljuego']);
+Route::put('admin/juegos/{juegoid}/upjuegos', [juegosController::class,'update']);
 Route::resource('desarrolladoras', desarrolladorasController::class);
 Route::resource('plataformas', plataformasController::class);
 
