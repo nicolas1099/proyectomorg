@@ -1,4 +1,6 @@
+import { IUsuario,getUsers } from './../../../interfaces/usuario-interface';
 import { UsuariosService } from './../../../service/usuarios.service';
+
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-cambiorol',
@@ -6,12 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cambiorol.component.scss'],
 })
 export class CambiorolComponent implements OnInit {
+  usuarios: IUsuario;
+  users: any;
 
-  constructor(private UsuariosService:UsuariosService) { console.log(this.UsuariosService.getUsuarios());}
+  constructor(private UsuariosService:UsuariosService,) { console.log(this.UsuariosService.getUsuarios());}
 
   async ngOnInit() {
-    let usuarios = await this.UsuariosService.getUsuarios();
-      console.log(this.UsuariosService);
+    let respuesta = await this.UsuariosService.getUsuarios();
+    if (respuesta.status == 'success'){
+      this.users = respuesta.data;
+      console.log(this.users);
+    }
   }
-
 }
+

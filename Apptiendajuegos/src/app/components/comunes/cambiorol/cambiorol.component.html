@@ -1,6 +1,10 @@
 <ion-header>
   <app-header seccion="edit usuarios"></app-header>
 </ion-header>
-<ion-list>
-  <p></p>
-</ion-list>
+<ion-item>
+  <h3>Listado de usuarios  </h3>
+</ion-item >
+<ion-item *ngFor="let Usuarios of users">
+  <ion-label>{{Usuarios.name}}</ion-label>
+  <ion-input required name="rol" type="text" [(ngModel)]="Usuarios.rol"></ion-input>
+</ion-item>

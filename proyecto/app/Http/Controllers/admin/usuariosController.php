@@ -15,8 +15,14 @@ class usuariosController extends Controller
      */
     public function index()
     {
-        $usuarios = User::with('cliente')->get();
-        return  response()->json($usuarios);
+        $usuarioss = User::all();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'usuarios',
+            'code' => 401,
+            'data' => $usuarioss
+        ]);
+    
     }
 
     /**

@@ -19,6 +19,17 @@ export interface IUsuario {
     image: string;
     cliente?: ICliente;
 }
+export interface getUsers {
+    name?: string;
+    usuarios?: IUsuario[]
+}
+export interface MsnApiUsuarios {
+    status?: string;
+    message?: string;
+    errors?: string
+    code?: number;
+    data?: getUsers;
+}
 
 export interface ILogin {
     email: string;

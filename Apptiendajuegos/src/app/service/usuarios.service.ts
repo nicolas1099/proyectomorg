@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { IUsuario, ILogin, MsnApiLogin, MsnApiRegister } from '../interfaces/usuario-interface';
+import { IUsuario, ILogin, MsnApiLogin, MsnApiRegister,MsnApiUsuarios } from '../interfaces/usuario-interface';
 
 const URL = environment.url;
 @Injectable({
@@ -19,9 +19,15 @@ export class UsuariosService {
 
   constructor(private http: HttpClient, private storage: Storage) { }
 
-  public getUsuarios(){
-    return this.http.get('http://proyecto.test/api/admin/usuarios');
-  }
+  async getUsuarios(): Promise<MsnApiUsuarios>{
+    const ruta = `${ URL }/api/admin/usuarios`;
+    return new Promise ( resolve => {
+      this.http.get<MsnApiUsuarios>(ruta)
+      .subscribe (respuesta => {
+        resolve( respuesta);
+      })
+    })
+    }
 
   login (loginUser: ILogin): Promise<MsnApiLogin>{
     const data = loginUser;
