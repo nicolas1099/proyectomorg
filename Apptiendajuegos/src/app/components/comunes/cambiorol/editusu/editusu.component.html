@@ -1,0 +1,18 @@
+<ion-header>
+  <app-header seccion="edit usuarios"></app-header>
+</ion-header>
+<ion-content *ngIf="users">
+  <ion-text>
+    {{users.name}}
+  </ion-text>
+  <form (ngSubmit)="updusu(fEditusuarios)"  #fEditusuarios="ngForm">
+    <ion-item>
+      <ion-label position="floating">rol del usuario</ion-label>
+      <ion-input required name="rol" type="text" [(ngModel)]="users.rol"></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit">Editar juego</ion-button>
+  </form>
+
+</ion-content>
+
+

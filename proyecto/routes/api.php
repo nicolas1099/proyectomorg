@@ -24,6 +24,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::resource('admin/usuarios', usuariosController::class);
+Route::put('admin/usuarios/{id}/upusuarios', [usuariosController::class,'update']);
+Route::get('admin/usuarios/{id}', [usuariosController::class,'show']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'signup']);
 

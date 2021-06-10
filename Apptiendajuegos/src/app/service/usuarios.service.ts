@@ -28,6 +28,30 @@ export class UsuariosService {
       })
     })
     }
+  async showusuario(id): Promise<MsnApiUsuarios>{
+    console.log('Id = ', id);
+    const ruta = `${ URL }/api/admin/usuarios/${id}`;
+    return new Promise ( resolve => {
+      this.http.get<MsnApiUsuarios>(ruta)
+      .subscribe (respuesta => {
+        resolve( respuesta);
+      })
+    })
+  }
+
+  async updUsuarios(id,rol: string): Promise<MsnApiUsuarios>{
+    const ruta = `${ URL }/api/admin/usuarios/${id}/upusuarios`;;
+    console.log(ruta);
+    const data = { rol };
+      console.log(data);
+      return new Promise ( resolve => {
+        this.http.put<MsnApiUsuarios>(ruta,data)
+        .subscribe(datos => {
+          console.log(datos);
+          resolve(datos);        
+        });
+    });
+  }
 
   login (loginUser: ILogin): Promise<MsnApiLogin>{
     const data = loginUser;

@@ -1,3 +1,4 @@
+import { EditusuComponent } from './cambiorol/editusu/editusu.component';
 import { CambiorolComponent } from './cambiorol/cambiorol.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,9 +14,10 @@ import { SignupComponent } from './signup/signup.component';
 
 
 
+
 @NgModule({
-  declarations: [HeaderComponent,PortadaComponent, PerfilComponent, LoginComponent, SignupComponent,CambiorolComponent],
-  exports: [HeaderComponent,PortadaComponent, PerfilComponent, LoginComponent, SignupComponent,CambiorolComponent],
+  declarations: [HeaderComponent,PortadaComponent, PerfilComponent, LoginComponent, SignupComponent,CambiorolComponent,EditusuComponent],
+  exports: [HeaderComponent,PortadaComponent, PerfilComponent, LoginComponent, SignupComponent,CambiorolComponent,EditusuComponent],
   imports: [
     CommonModule,
     IonicModule,

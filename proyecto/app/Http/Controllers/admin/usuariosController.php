@@ -54,7 +54,18 @@ class usuariosController extends Controller
      */
     public function show($id)
     {
-        //
+        $usuario = User::with('cliente')
+                    ->select('*')
+                    ->where('id', $id)
+                    ->get();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'usuario selecionado'. $id ,
+            'data' => $usuario,
+            'code' => 401,
+        
+        ]);
+    
     }
 
     /**
@@ -77,7 +88,19 @@ class usuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::where('id', $id)->update($request->only('rol'));
+        $user1 = User::where('id', $id)->get();
+    
+        if ($id === null) {
+            return response()->json('', 404);
+        }else{
+            return  response()->json([
+                'status' => 'success',
+                'message' => 'usuarios.',
+                'code' => 401,
+                'data' => $user1
+            ]);
+        }
     }
 
     /**

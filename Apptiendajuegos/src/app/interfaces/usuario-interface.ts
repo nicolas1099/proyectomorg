@@ -9,14 +9,14 @@ export interface ICliente {
     CodigoPostal?: string;
 }
 export interface IUsuario {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
     apellidos: string;
     surname?: string;
-    rol: string;
-    email: string;
-    password: string;
-    image: string;
+    rol?: string;
+    email?: string;
+    password?: string;
+    image?: string;
     cliente?: ICliente;
 }
 export interface getUsers {
