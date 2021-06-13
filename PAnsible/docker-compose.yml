@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  sweb:
+    container_name: apache
+    build: 
+      context: ./servidores
+      dockerfile: ./Dockerfile
+    environment: 
+      - USUARIO=tiendajuegos
+      - PASSWD=1234
+      - HOSTNAME=SWEB
+    networks: 
+      netansible:
+          ipv4_address: 172.18.10.2
+  sbd:
+    container_name: mysql
+    build: 
+      context: ./servidores
+      dockerfile: ./Dockerfile
+    ports: 
+      - "3306:3306"
+    environment: 
+      - USUARIO=tiendajuegos
+      - PASSWD=1234
+      - HOSTNAME=SBD
+    networks: 
+      netansible:
+          ipv4_address: 172.18.10.3
+  
+networks: 
+  netansible:
+      ipam: 
+          driver: default
+          config: 
+              - subnet: 172.18.10.0/24

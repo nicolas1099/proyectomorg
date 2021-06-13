@@ -1,0 +1,16 @@
+---
+
+- name: Remove apt
+  gather_facts: false
+  remote_user: tiendajuegos
+  become: yes
+  hosts: sgbd
+
+  tasks:
+    - name: removing apache
+      apt:
+        name:
+          - apache2
+          - bind9
+        state: absent
+...

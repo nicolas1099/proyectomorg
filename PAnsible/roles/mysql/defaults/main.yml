@@ -1,0 +1,26 @@
+---
+mysql_packages:
+  - python3-apt
+  - apt
+  #- python3-selinux
+  - mysql-server
+  - python3-pymysql
+  #- phpmyadmin
+
+mysql_service: mysql
+
+mysql_conf_dir: "/etc/mysql"
+
+mysql_port: 3306
+mysql_bind_address: "0.0.0.0"
+mysql_root_db_pass: root
+
+mysql_db: 
+  - name: tiendajuegos
+
+mysql_users:
+    name: tiendajuegos
+    pass: tiendajuegos
+    priv: "*.*:ALL"
+    state: present
+    

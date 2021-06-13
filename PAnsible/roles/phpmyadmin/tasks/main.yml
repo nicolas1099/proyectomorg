@@ -1,0 +1,90 @@
+---
+####Instalar php y phpmyadmin
+- name: Install php 
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  loop: "{{ php_packages }}"
+
+###Comprobar si composer esta instalado
+- name: check composer
+  stat: 
+    path: /usr/local/bin/composer
+  register: composer_bin
+  tags: php
+
+#####descargar composer
+- name: download composer2
+  shell: curl -sS https://getcomposer.org/installer -o composer-setup.php
+
+#####Instalar composer
+- name: install composer
+  shell: sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+# #Generar clave ssh de usuario tiendajuegos
+- name: Crear SSH Key para diploy github
+  user:
+    name: tiendajuegos
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+    ssh_key_type: rsa
+    ssh_key_file: .ssh/id_rsa
+    #ssh_key_passphrase: johancesar
+    ssh_key_comment: jcrcink@gmail.com
+    state: present
+
+
+        
+- name: crear archivo known_hosts
+  shell: "sudo {{ item }}"
+  args:
+    chdir: /home/tiendajuegos/.ssh/
+  loop:
+    - touch known_hosts
+    - chown tiendajuegos:tiendajuegos known_hosts
+
+
+##Configurar /etc/ssh/ssh_config/
+- name: Insert StrictHostKey ssh_config
+  blockinfile:
+    name: /etc/ssh/ssh_config
+    block: |
+      StrictHostKeyChecking no
+    marker: "# {mark} ANSIBLE MANAGED BLOCK manager and managed nodes"
+    backup: yes
+    state: present
+
+- name: Iniciar ssh-agent
+  become_user: tiendajuegos
+  # shell: eval $(ssh-agent)
+  shell: eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa
+
+# - name: iniciar el repositorio
+#   shell:
+  
+
+- name: copiar llave publica de git
+  fetch:
+    src: /home/tiendajuegos/.ssh/id_rsa.pub
+    dest: /home/johanvps/docker/PAnsible/key_pub_apache/
+    flat: yes
+
+#Crear directorio de bbdd
+- name: Directorio bbdd
+  file:
+    path: /home/tiendajuegos/bbdd
+    state: directory
+    mode: '0755'
+    owner: tiendajuegos
+    group: tiendajuegos
+
+# Descargar brach  donde esta el .sql del proyecto
+- name: recuperrar de rama de git
+  remote_user: tiendajuegos
+  git:
+    repo: 'git@github.com:nicolas1099/proyectomorg.git'
+    dest: /home/tiendajuegos/proyectos
+    key_file: /home/tiendajuegos/.ssh/id_rsa
+    #accept_hostkey: yes
+    version: niko

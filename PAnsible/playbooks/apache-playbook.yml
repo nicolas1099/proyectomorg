@@ -1,0 +1,13 @@
+---
+- hosts: sgbd
+  remote_user: tiendajuegos
+  become: yes
+  pre_tasks:
+  - name: Update
+    apt: update_cache=yes force_apt_get=yes  
+  tasks:
+    - name: Install Apache 2 package
+      apt: name=apache2 state=latest
+    - name: check apache is running & start on boot
+      service:  name=apache2 state=started enabled=yes
+...

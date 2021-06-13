@@ -1,0 +1,15 @@
+---
+- name: instalar paquetes en mysql
+  hosts: sgbd
+  remote_user: root
+  become: yes
+  vars:
+    packages:
+      - mysql-server
+      - phpmyadmin
+  tasks:
+    - name: Install paquetes
+      apt: 
+          name: "{{ packages }}"
+  
+...

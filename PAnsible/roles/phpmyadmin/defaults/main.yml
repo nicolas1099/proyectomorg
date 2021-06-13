@@ -1,0 +1,9 @@
+---
+php_packages:
+  - python3-apt
+  - ca-certificates
+  - php
+  - libapache2-mod-php7.4
+  - php-mysql
+  - php-bcmath
+  - phpmyadmin

@@ -1,0 +1,6 @@
+---
+- name: configurar bind9 como dns
+  hosts: controlador
+  roles:
+    - dns
+...

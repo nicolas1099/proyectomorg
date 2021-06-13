@@ -1,0 +1,23 @@
+---
+bind9_packages:
+  - bind9
+  - bind9utils
+  - bind9-doc
+
+domain: project.local
+rev_domain: 10.18.172
+
+
+records:
+  apache:
+    forward: 172.18.10.2 
+    type: A
+    last: 2
+    rev: apache.project.local
+  mysql:
+    forward: 172.18.10.3
+    type: A
+    last: 3
+    rev: mysql.project.local
+
+...

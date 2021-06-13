@@ -1,0 +1,32 @@
+---
+- name: Deshabilitar virtual host por defecto
+  file:
+    path: /etc/apache2/sites-enabled/000-default.conf
+    state: absent
+  notify: apache restart
+
+- name: Activar modulos para proxy
+  apache2_module:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ apache_mods_enabled }}"
+  notify: apache restart
+
+- name: Añadir configuración apache vhost
+  template:
+    src: "{{ apache_vhosts_template }}"
+    dest: "/etc/apache2/sites-available/{{ apache_vhosts_filename }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: apache restart
+  when: apache_create_vhosts
+
+- name: Añadir symlink in sites-enabled
+  file:
+    src: "/etc/apache2/sites-available/{{ apache_vhosts_filename }}"
+    dest: "/etc/apache2/sites-enabled/{{ apache_vhosts_filename }}"
+    state: link
+  notify: apache restart
+  when: apache_create_vhosts
+...

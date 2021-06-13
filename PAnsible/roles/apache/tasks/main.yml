@@ -1,0 +1,7 @@
+---
+- name: Instalar apache2
+  apt: 
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ apache_packages }}"
+...

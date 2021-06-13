@@ -1,0 +1,7 @@
+---
+- name: configurar apache2 como proxy
+  hosts: controlador
+  become: true
+  roles:
+    - proxy_inverso
+...

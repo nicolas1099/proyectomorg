@@ -1,0 +1,70 @@
+---
+- name: Instalar git
+  hosts: sgbd
+  remote_user: tiendajuegos
+  become: true
+  tasks:
+    - name: instalar paquetes
+      apt:
+        name: "{{item}}"
+        state: latest
+        update-cache: yes
+      loop:
+        - git
+        - python3-pexpect
+        - python3-apt
+
+# #Generar clave ssh de usuario tiendajuegos
+    - name: Crear SSH Key para diploy github
+      user:
+        name: tiendajuegos
+        generate_ssh_key: yes
+        ssh_key_bits: 4096
+        ssh_key_type: rsa
+        ssh_key_file: .ssh/id_rsa
+        #ssh_key_passphrase: johancesar
+        ssh_key_comment: jcrcink@gmail.com
+        state: present
+
+
+        
+    - name: crear archivo known_hosts
+      shell: "sudo {{ item }}"
+      args:
+        chdir: /home/tiendajuegos/.ssh/
+      loop:
+        - touch known_hosts
+        - chown tiendajuegos:tiendajuegos known_hosts
+
+    - name: crear directorio de proyecto git
+      file:
+        path: /home/tiendajuegos/projects
+        state: directory
+        mode: '0755'
+        group: tiendajuegos
+        owner: tiendajuegos
+
+    ##Configurar /etc/ssh/ssh_config/
+    - name: Insert StrictHostKey ssh_config
+      blockinfile:
+        name: /etc/ssh/ssh_config
+        block: |
+          StrictHostKeyChecking no
+        marker: "# {mark} ANSIBLE MANAGED BLOCK manager and managed nodes"
+        backup: yes
+        state: present
+
+    - name: Iniciar ssh-agent
+      become_user: tiendajuegos
+      # shell: eval $(ssh-agent)
+      shell: eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa
+
+    # - name: iniciar el repositorio
+    #   shell:
+      
+
+    - name: copiar llave publica de git
+      fetch:
+        src: /home/tiendajuegos/.ssh/id_rsa.pub
+        dest: /home/johanvps/docker/PAnsible/key_pub_mysql/
+        flat: yes

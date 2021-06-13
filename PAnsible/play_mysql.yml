@@ -1,0 +1,9 @@
+---
+
+- name: Bases de datos mysql servers
+  hosts: sgbd
+  become: true
+  roles:
+    - mysql
+
+...

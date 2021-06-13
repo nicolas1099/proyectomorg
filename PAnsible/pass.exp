@@ -1,0 +1,10 @@
+#!/usr/bin/expect -f
+set timeout -1
+
+spawn ssh-add /home/tiendajuegos/.ssh/id_rsa
+
+expect "Enter passphrase for /home/tiendajuegos/.ssh/id_rsa: "
+
+send "johancesar\r"
+
+expect eof

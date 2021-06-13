@@ -1,0 +1,11 @@
+{% for vhost in apache_vhosts %}
+<VirtualHost {{ apache_listen_ip }}:{{ apache_listen_port }}>
+  ServerName {{ vhost.servername }}
+{% if ip_server is defined %}
+  ProxyPass /{{ proyecto }} http://{{ ip_server }}/
+  ProxyPassReverse /{{ proyecto }} http://{{ ip_server }}/
+{% endif %}
+  ProxyPreserveHost on
+</VirtualHost>
+
+{% endfor %}
