@@ -4,4 +4,28 @@
     name: "{{ item }}"
     state: latest
   loop: "{{ apache_packages }}"
+
+- name: Deshabilitar virtual host por defecto
+  file:
+    path: /etc/apache2/sites-enabled/000-default.conf
+    state: absent
+  notify: restart_apache
+
+- name: Añadir configuración apache tiendajuegos.conf
+  template:
+    src: "{{ apache_tiendajuegos_template }}"
+    dest: "/etc/apache2/sites-available/{{ apache_tiendajuegos_filename }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_apache
+  when: apache_create_vhosts
+
+- name: Añadir symlink in sites-enabled
+  file:
+    src: "/etc/apache2/sites-available/{{ apache_tiendajuegos_filename }}"
+    dest: "/etc/apache2/sites-enabled/{{ apache_tiendajuegos_filename }}"
+    state: link
+  notify: restart_apache
+  when: apache_create_vhosts
 ...

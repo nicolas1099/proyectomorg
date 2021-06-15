@@ -1,0 +1,56 @@
+---
+#####descargar composer
+# - name: download composer
+#   shell: wget https://getcomposer.org/download/1.8.6/composer.phar
+#   args:
+#     chdir: /usr/local/bin/
+
+- name: download composer
+  get_url:
+    url: https://getcomposer.org/download/1.8.6/composer.phar
+    dest: /usr/local/bin/
+    validate_certs: no
+
+# Convertir composer.phar y hacerlo ejecutable
+- name: mover composer 
+  shell: mv composer.phar composer
+  args:
+    chdir: /usr/local/bin/
+
+# Hacer ejecutable composer
+- name: ejecutable composer
+  file:
+    path: /usr/local/bin/composer
+    mode: '0771'
+    owner: tiendajuegos
+    group: tiendajuegos
+
+#Instalar nodejs
+- name: nodejs
+  shell: curl -sL https://deb.nodesource.com/setup_14.x -o nodesource-setup.sh && bash nodesource-setup.sh
+
+- name: instalar apt nodejs
+  apt: 
+    name: nodejs
+    state: latest
+    update_cache: yes
+
+
+#Crear Carpeta de proyectos git
+- name: Crear carpeta de proyectos
+  file:
+    path: /var/www/html/proyectos/
+    state: directory
+    recurse: yes
+    owner: tiendajuegos
+    group: www-data
+    mode: g+w
+
+# Descargar brach  donde esta el proyecto de laravel y ionic
+- name: recuperrar de rama de git
+  remote_user: tiendajuegos
+  git:
+    repo: 'git@github.com:nicolas1099/proyectomorg.git'
+    dest: /var/www/html/proyectos/
+    key_file: /home/tiendajuegos/.ssh/id_rsa
+    version: niko

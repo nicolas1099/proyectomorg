@@ -1,0 +1,12 @@
+{% for vhost in apache_vhosts %}
+<VirtualHost {{ apache_listen_ip }}:{{ apache_listen_port }}>
+        ServerName {{ vhost.servername }}
+        DocumentRoot /var/www/html/proyectos/proyecto/public
+        <Directory /var/www/html/proyectos/proyecto/public>
+                Require all granted
+                AllowOverride All
+        </Directory>
+        #ErrorLog ${APACHE_LOG_DIR}/error.log
+        #CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+{% endfor %}

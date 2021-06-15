@@ -7,22 +7,8 @@
     update_cache: yes
   loop: "{{ php_packages }}"
 
-###Comprobar si composer esta instalado
-- name: check composer
-  stat: 
-    path: /usr/local/bin/composer
-  register: composer_bin
-  tags: php
 
-#####descargar composer
-- name: download composer2
-  shell: curl -sS https://getcomposer.org/installer -o composer-setup.php
-
-#####Instalar composer
-- name: install composer
-  shell: sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-
-# #Generar clave ssh de usuario tiendajuegos
+#Generar clave ssh de usuario tiendajuegos
 - name: Crear SSH Key para diploy github
   user:
     name: tiendajuegos
@@ -30,12 +16,11 @@
     ssh_key_bits: 4096
     ssh_key_type: rsa
     ssh_key_file: .ssh/id_rsa
-    #ssh_key_passphrase: johancesar
     ssh_key_comment: jcrcink@gmail.com
     state: present
 
 
-        
+# #cREAR ARCHIVO kNOW_HOST
 - name: crear archivo known_hosts
   shell: "sudo {{ item }}"
   args:
@@ -57,11 +42,9 @@
 
 - name: Iniciar ssh-agent
   become_user: tiendajuegos
-  # shell: eval $(ssh-agent)
-  shell: eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa
+  shell: eval $(ssh-agent -s) && ssh-add /home/tiendajuegos/.ssh/id_rsa
 
-# - name: iniciar el repositorio
-#   shell:
+
   
 
 - name: copiar llave publica de git
@@ -70,21 +53,4 @@
     dest: /home/johanvps/docker/PAnsible/key_pub_apache/
     flat: yes
 
-#Crear directorio de bbdd
-- name: Directorio bbdd
-  file:
-    path: /home/tiendajuegos/bbdd
-    state: directory
-    mode: '0755'
-    owner: tiendajuegos
-    group: tiendajuegos
 
-# Descargar brach  donde esta el .sql del proyecto
-- name: recuperrar de rama de git
-  remote_user: tiendajuegos
-  git:
-    repo: 'git@github.com:nicolas1099/proyectomorg.git'
-    dest: /home/tiendajuegos/proyectos
-    key_file: /home/tiendajuegos/.ssh/id_rsa
-    #accept_hostkey: yes
-    version: niko

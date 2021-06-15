@@ -5,4 +5,14 @@ apache_packages:
 
 apache_mods_enabled:
   - rewrite.load
+
+apache_tiendajuegos_template: "tiendajuegos.conf.j2"
+apache_tiendajuegos_filename: "tiendajuegos.conf"
+apache_listen_ip: "*"
+apache_listen_port: 80
+apache_create_vhosts: true
+proyecto: "tiendajuegosapi"
+
+apache_vhosts:
+  - servername: "tiendajuegosapi.com"
 ...
