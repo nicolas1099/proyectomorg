@@ -26,6 +26,7 @@
     state: started 
     enabled: yes
 
+#Permite mayor compatibilidad con phpmyadmin
 - name: Cambiar plugin de mysql
   shell: mysql -u root -e 'UPDATE mysql.user SET plugin="mysql_native_password" WHERE user="root" AND host="localhost"'
 
@@ -48,14 +49,14 @@
   #  - localhost
   # #when: ansible_hostname != 'localhost' 
 
-
+## TEMPLATE con las credenciales del usuario ROOT 
 - name: copy .my.cnf file with root password credentials
   template: 
     src: .my.cnf.j2 
-    #dest: ~/.my.cnf
     dest: /root/.my.cnf 
     mode: 0600
 
+#Quitar los usuarios anonimos de la BBDD
 - name: ensure anonymous users are not in the database
   mysql_user: 
     name: ''
@@ -65,11 +66,13 @@
    - localhost
    - "{{ ansible_hostname }}"
 
+#Remover los Test de la BBDD
 - name: remove the test database
   mysql_db:
     name: test
     state: absent
 
+#Crear la BBDD simpre y cuando mysql_db tenga datos
 - name: Create the database
   mysql_db:
     name: "{{ item.name }}"
@@ -108,7 +111,7 @@
     version: db
 
 
-#Importar .sql a bbdd
+#Importar .sql a BBDD
 - name: Importar .sql
   mysql_db:
     name: "{{ item.name }}"

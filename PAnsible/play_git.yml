@@ -1,4 +1,5 @@
 ---
+# Instalación de Git
 - name: Instalar git
   hosts: sgbd
   remote_user: tiendajuegos
@@ -28,13 +29,22 @@
 
 
         
-    - name: crear archivo known_hosts
-      shell: "sudo {{ item }}"
-      args:
-        chdir: /home/tiendajuegos/.ssh/
-      loop:
-        - touch known_hosts
-        - chown tiendajuegos:tiendajuegos known_hosts
+    # - name: crear archivo known_hosts
+    #   shell: "sudo {{ item }}"
+    #   args:
+    #     chdir: /home/tiendajuegos/.ssh/
+    #   loop:
+    #     - touch known_hosts
+    #     - chown tiendajuegos:tiendajuegos known_hosts
+
+    # Generar el archivo known_hosts
+    - name: archivo known_hosts
+      file:
+        path: /home/tiendajuegos/.ssh/known_hosts
+        state: touch
+        owner: tiendajuegos
+        group: tiendajuegos
+        mode: '0644'
 
     - name: crear directorio de proyecto git
       file:
@@ -53,16 +63,13 @@
         marker: "# {mark} ANSIBLE MANAGED BLOCK manager and managed nodes"
         backup: yes
         state: present
-
+    ##Uso del Agente SSH para gurdar las claves
     - name: Iniciar ssh-agent
       become_user: tiendajuegos
       # shell: eval $(ssh-agent)
       shell: eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa
 
-    # - name: iniciar el repositorio
-    #   shell:
-      
-
+    ## Copiar llave publica al nodo controlador
     - name: copiar llave publica de git
       fetch:
         src: /home/tiendajuegos/.ssh/id_rsa.pub

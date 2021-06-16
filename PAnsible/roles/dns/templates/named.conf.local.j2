@@ -1,9 +1,9 @@
-zone "{{ domain }}" IN {
+zone "{{ domain }}" {
     type master;
     file "/etc/bind/zones/db.{{ domain }}";
 };
 
-zone "{{ rev_domain }}.in-addr.arpa" IN {
+zone "{{ rev_domain }}.in-addr.arpa" {
     type master;
     file "/etc/bind/zones/db.{{ rev_domain }}";
 };

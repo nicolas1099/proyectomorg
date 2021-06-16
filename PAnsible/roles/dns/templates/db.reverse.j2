@@ -1,13 +1,13 @@
-$ORIGIN .
-$TTL 604800	; 1 week
-@	IN SOA	{{ ansible_fqdn }}. admin.{{ domain }}. (
-				7          ; serial
+;$TTL 604800	; 1 week
+;$ORIGIN {{ rev_domain }}.
+@	IN	SOA	{{ ansible_fqdn }}.	root.{{ domain }}. (
+				18          ; serial
 				604800     ; refresh (1 week)
 				86400      ; retry (1 day)
 				2419200    ; expire (4 weeks)
-				604800     ; minimum (1 week)
-				)
-@   IN		NS	{{ ansible_fqdn }}.
+				604800)    ; minimum (1 week)
+				
+	IN	NS	{{ ansible_fqdn }}.
 {% for item, value in records.items() %}
-{{ value.last }}	IN	PTR		{{ value.rev }}
+{{ value.last }}	IN	{{ value.typeR }}	{{ value.rev }}
 {% endfor %}

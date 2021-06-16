@@ -1,10 +1,12 @@
 ---
+##Desabilitamos los virtualhost de apache2
 - name: Deshabilitar virtual host por defecto
   file:
     path: /etc/apache2/sites-enabled/000-default.conf
     state: absent
   notify: apache restart
 
+#Activación de modulos para proxy
 - name: Activar modulos para proxy
   apache2_module:
     name: "{{ item }}"
@@ -22,11 +24,24 @@
   notify: apache restart
   when: apache_create_vhosts
 
-- name: Añadir symlink in sites-enabled
+  #Tarea que sustituye a a2ensite
+- name: Añadir symlink en sites-enabled
   file:
     src: "/etc/apache2/sites-available/{{ apache_vhosts_filename }}"
     dest: "/etc/apache2/sites-enabled/{{ apache_vhosts_filename }}"
     state: link
   notify: apache restart
   when: apache_create_vhosts
+
+##Configurar /etc/apache2/apache2.conf
+##Permitir metodo POST
+- name: Insert SetEnvIf Authorization apache2.conf
+  blockinfile:
+    name: /etc/apache2/apache2.conf
+    block: |
+      SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+    marker: "# {mark} ANSIBLE MANAGED BLOCK manager and managed nodes"
+    backup: yes
+    state: present
+  notify: apache restart
 ...

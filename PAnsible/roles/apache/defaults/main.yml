@@ -11,7 +11,7 @@ apache_tiendajuegos_filename: "tiendajuegos.conf"
 apache_listen_ip: "*"
 apache_listen_port: 80
 apache_create_vhosts: true
-proyecto: "tiendajuegosapi"
+#proyecto: "tiendajuegosapi"
 
 apache_vhosts:
   - servername: "tiendajuegosapi.com"

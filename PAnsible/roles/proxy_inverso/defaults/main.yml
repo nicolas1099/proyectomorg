@@ -12,10 +12,10 @@ apache_listen_port: 80
 apache_create_vhosts: true
 apache_vhosts_filename: "vhosts.conf"
 apache_vhosts_template: "vhosts.conf.j2"
-proyecto: "tiendajuegos"
+
 
 apache_vhosts:
-  - servername: "tiendajuegos.jcproject.es"
+  - servername: "jcproject.es"
 ip_server: "apache"
 
 #apache_allow_override: "All"

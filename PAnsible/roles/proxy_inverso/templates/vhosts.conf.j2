@@ -1,9 +1,11 @@
 {% for vhost in apache_vhosts %}
 <VirtualHost {{ apache_listen_ip }}:{{ apache_listen_port }}>
+  SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
   ServerName {{ vhost.servername }}
+  ServerAlias www.{{ vhost.servername }}
 {% if ip_server is defined %}
-  ProxyPass /{{ proyecto }} http://{{ ip_server }}/
-  ProxyPassReverse /{{ proyecto }} http://{{ ip_server }}/
+  ProxyPass / http://{{ ip_server }}/
+  ProxyPassReverse / http://{{ ip_server }}/
 {% endif %}
   ProxyPreserveHost on
 </VirtualHost>
