@@ -5,6 +5,6 @@
   become: true
   roles:
     - apache
-    # - phpmyadmin
+    - phpmyadmin
     - laravel
 ...

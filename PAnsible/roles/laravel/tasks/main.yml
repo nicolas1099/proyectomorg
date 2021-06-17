@@ -54,3 +54,42 @@
     dest: /var/www/html/proyectos/
     key_file: /home/tiendajuegos/.ssh/id_rsa
     version: niko
+
+# Subir template .env
+- name: .env
+  template:
+    src: .env.j2
+    dest: /var/www/html/proyectos/proyecto/.env
+    owner: tiendajuegos
+    group: www-data
+    mode: 0644
+
+#Procedimiento para la puesta 
+#apunto de un proyecto clonado
+- name: composer
+  shell: composer install && npm install \
+          php artisan key:generate \
+          php artisan install:passport --force
+  chdir: /var/www/html/proyectos/proyecto/
+
+- name: npm
+  shell: npm install
+  chdir: /var/www/html/proyectos/proyecto/
+
+
+  
+  
+
+
+- name: crear el directory public en apache2.conf
+  blockinfile:
+    path: /etc/apache2/apache2.conf
+    marker: "######"
+    block: |
+      <Directory /var/www/html/proyectos/proyecto/public>
+        AllowOverride All
+        Require all granted
+        #AllowMethods GET POST OPTIONS DELETE PUT
+      </Directory> 
+    regexp: '^#<Directory /srv/>'
+    state: present

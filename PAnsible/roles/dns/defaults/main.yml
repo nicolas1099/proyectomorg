@@ -4,9 +4,9 @@ bind9_packages:
   - bind9utils
   - bind9-doc
 
-domain: project.local
-rev_domain: 10.18.172
-
+domain: project20.local
+rev_domain: 20.18.172
+host: 172.18.20
 
 records:
   dns:
@@ -14,18 +14,18 @@ records:
     type: A
     typeR: PTR
     last: 1
-    rev: dns.project.local.
+    rev: "dns.{{domain}}."
   apache:
-    forward: 172.18.10.2 
+    forward: "{{ host }}.2.{{ domain }}" 
     type: A
     typeR: PTR
     last: 2
-    rev: apache.project.local.
+    rev: "apache.{{domain}}."
   mysql:
-    forward: 172.18.10.3
+    forward: "{{ host }}.3.{{ domain }}"
     type: A
     typeR: PTR
     last: 3
-    rev: mysql.project.local.
+    rev: "mysql.{{domain}}."
 
 ...

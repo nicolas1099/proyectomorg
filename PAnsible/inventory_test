@@ -1,0 +1,17 @@
+[servidores]
+localhost ansible_connection=local
+172.18.20.2 host_name=apache2
+172.18.20.3 host_name=mysql2
+
+[controlador]
+localhost
+
+[sgbd]
+172.18.20.3
+
+[webservers]
+172.18.20.2
+
+[tiendajuegos:children]
+sgbd
+webservers

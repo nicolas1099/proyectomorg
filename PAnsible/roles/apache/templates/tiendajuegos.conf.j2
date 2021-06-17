@@ -1,6 +1,7 @@
 {% for vhost in apache_vhosts %}
 <VirtualHost {{ apache_listen_ip }}:{{ apache_listen_port }}>
         ServerName {{ vhost.servername }}
+        ServerAlias www.{{ vhost.servername }}
         DocumentRoot /var/www/html/proyectos/proyecto/public
         <Directory /var/www/html/proyectos/proyecto/public>
                 Require all granted

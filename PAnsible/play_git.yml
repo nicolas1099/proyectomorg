@@ -1,7 +1,7 @@
 ---
 # Instalación de Git
 - name: Instalar git
-  hosts: sgbd
+  hosts: tiendajuegos
   remote_user: tiendajuegos
   become: true
   tasks:
@@ -23,12 +23,9 @@
         ssh_key_bits: 4096
         ssh_key_type: rsa
         ssh_key_file: .ssh/id_rsa
-        #ssh_key_passphrase: johancesar
         ssh_key_comment: jcrcink@gmail.com
         state: present
-
-
-        
+     
     # - name: crear archivo known_hosts
     #   shell: "sudo {{ item }}"
     #   args:
@@ -63,6 +60,7 @@
         marker: "# {mark} ANSIBLE MANAGED BLOCK manager and managed nodes"
         backup: yes
         state: present
+
     ##Uso del Agente SSH para gurdar las claves
     - name: Iniciar ssh-agent
       become_user: tiendajuegos
@@ -73,5 +71,8 @@
     - name: copiar llave publica de git
       fetch:
         src: /home/tiendajuegos/.ssh/id_rsa.pub
-        dest: /home/johanvps/docker/PAnsible/key_pub_mysql/
+        dest: "/home/johanvps/proyecto_git/proyectomorg/PAnsible/key_pub_{{ item }}/"
         flat: yes
+      loop:
+        - apache2
+        - mysql2

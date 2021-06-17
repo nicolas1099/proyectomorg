@@ -8,49 +8,49 @@
   loop: "{{ php_packages }}"
 
 
-#Generar clave ssh de usuario tiendajuegos
-- name: Crear SSH Key para diploy github
-  user:
-    name: tiendajuegos
-    generate_ssh_key: yes
-    ssh_key_bits: 4096
-    ssh_key_type: rsa
-    ssh_key_file: .ssh/id_rsa
-    ssh_key_comment: jcrcink@gmail.com
-    state: present
+# # # #Generar clave ssh de usuario tiendajuegos
+# # # - name: Crear SSH Key para diploy github
+# # #   user:
+# # #     name: tiendajuegos
+# # #     generate_ssh_key: yes
+# # #     ssh_key_bits: 4096
+# # #     ssh_key_type: rsa
+# # #     ssh_key_file: .ssh/id_rsa
+# # #     ssh_key_comment: jcrcink@gmail.com
+# # #     state: present
 
 
-# #cREAR ARCHIVO kNOW_HOST
-- name: crear archivo known_hosts
-  shell: "sudo {{ item }}"
-  args:
-    chdir: /home/tiendajuegos/.ssh/
-  loop:
-    - touch known_hosts
-    - chown tiendajuegos:tiendajuegos known_hosts
+# # # # #cREAR ARCHIVO kNOW_HOST
+# # # - name: crear archivo known_hosts
+# # #   shell: "sudo {{ item }}"
+# # #   args:
+# # #     chdir: /home/tiendajuegos/.ssh/
+# # #   loop:
+# # #     - touch known_hosts
+# # #     - chown tiendajuegos:tiendajuegos known_hosts
 
 
-##Configurar /etc/ssh/ssh_config/
-- name: Insert StrictHostKey ssh_config
-  blockinfile:
-    name: /etc/ssh/ssh_config
-    block: |
-      StrictHostKeyChecking no
-    marker: "# {mark} ANSIBLE MANAGED BLOCK manager and managed nodes"
-    backup: yes
-    state: present
+# # # ##Configurar /etc/ssh/ssh_config/
+# # # - name: Insert StrictHostKey ssh_config
+# # #   blockinfile:
+# # #     name: /etc/ssh/ssh_config
+# # #     block: |
+# # #       StrictHostKeyChecking no
+# # #     marker: "# {mark} ANSIBLE MANAGED BLOCK manager and managed nodes"
+# # #     backup: yes
+# # #     state: present
 
-- name: Iniciar ssh-agent
-  become_user: tiendajuegos
-  shell: eval $(ssh-agent -s) && ssh-add /home/tiendajuegos/.ssh/id_rsa
+# # # - name: Iniciar ssh-agent
+# # #   become_user: tiendajuegos
+# # #   shell: eval $(ssh-agent -s) && ssh-add /home/tiendajuegos/.ssh/id_rsa
 
 
   
 
-- name: copiar llave publica de git
-  fetch:
-    src: /home/tiendajuegos/.ssh/id_rsa.pub
-    dest: /home/johanvps/docker/PAnsible/key_pub_apache/
-    flat: yes
+# # # - name: copiar llave publica de git
+# # #   fetch:
+# # #     src: /home/tiendajuegos/.ssh/id_rsa.pub
+# # #     dest: /home/johanvps/docker/PAnsible/key_pub_apache/
+# # #     flat: yes
 
 

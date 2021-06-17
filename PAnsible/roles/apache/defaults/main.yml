@@ -14,5 +14,5 @@ apache_create_vhosts: true
 #proyecto: "tiendajuegosapi"
 
 apache_vhosts:
-  - servername: "tiendajuegosapi.com"
+  - servername: "tiendajapi.es"
 ...
