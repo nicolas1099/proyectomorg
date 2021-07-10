@@ -64,21 +64,31 @@
     group: www-data
     mode: 0644
 
-#Procedimiento para la puesta 
-#apunto de un proyecto clonado
-- name: composer
-  shell: composer install && npm install \
-          php artisan key:generate \
-          php artisan install:passport --force
-  chdir: /var/www/html/proyectos/proyecto/
+#Procedimiento para la puesta apunto de un proyecto clonado
+- name: Instalar composer.
+  shell: composer install
+  args:
+    chdir: /var/www/html/proyectos/proyecto/
 
 - name: npm
   shell: npm install
-  chdir: /var/www/html/proyectos/proyecto/
+  args:
+    chdir: /var/www/html/proyectos/proyecto/
 
+- name: php artisan
+  shell: php artisan key:generate
+  args:
+    chdir: /var/www/html/proyectos/proyecto/
 
-  
-  
+- name: php passport
+  shell: php artisan passport:key --force
+  args:  
+    chdir: /var/www/html/proyectos/proyecto/
+
+- name: npm
+  shell: npm install
+  args:
+    chdir: /var/www/html/proyectos/proyecto/
 
 
 - name: crear el directory public en apache2.conf

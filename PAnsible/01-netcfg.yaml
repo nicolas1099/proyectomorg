@@ -1,0 +1,26 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      match:
+        macaddress: 00:50:56:41:7b:60
+      addresses: 
+        - x.x.x.x/32 
+        #- 2a02:c206:2051:5546:0000:0000:0000:0001/64
+      #gateway6: fe80::1 
+      routes:
+        - to: 0.0.0.0/0
+          via: x.x.x.1
+          on-link: true
+      nameservers:
+        search:
+          - project.local
+          - project20.local
+        #search: [ invalid ]
+        addresses:
+          - 127.0.0.1
+          - 161.97.189.51
+          - 161.97.189.52 
+          #- 2a02:c206:5028::1:53
+          #- 2a02:c206:5028::2:53 

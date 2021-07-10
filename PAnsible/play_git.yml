@@ -25,14 +25,7 @@
         ssh_key_file: .ssh/id_rsa
         ssh_key_comment: jcrcink@gmail.com
         state: present
-     
-    # - name: crear archivo known_hosts
-    #   shell: "sudo {{ item }}"
-    #   args:
-    #     chdir: /home/tiendajuegos/.ssh/
-    #   loop:
-    #     - touch known_hosts
-    #     - chown tiendajuegos:tiendajuegos known_hosts
+
 
     # Generar el archivo known_hosts
     - name: archivo known_hosts

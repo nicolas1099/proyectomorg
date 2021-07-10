@@ -13,12 +13,6 @@
     dest: "{{ mysql_conf_dir }}/my.cnf"
   notify:  restart_mysql
 
-# - name: Create the directory /etc/mysql/conf.d
-#   file: 
-#     path: /etc/mysql/conf.d 
-#     state: directory
-#   notify:
-#    - restart_mysql
 
 - name: Start the mysql services
   service: 
@@ -42,12 +36,6 @@
     #host_all: yes #"{{ item }}"
     password: '{{ mysql_root_db_pass }}'
     state: present
-  # loop:
-  #  #- "{{ ansible_hostname }}"
-  #  - 127.0.0.1
-  #  - ::1
-  #  - localhost
-  # #when: ansible_hostname != 'localhost' 
 
 ## TEMPLATE con las credenciales del usuario ROOT 
 - name: copy .my.cnf file with root password credentials
